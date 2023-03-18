@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { type CheckboxData } from '../../types/checkbox'
+import Teddy from '../Teddy/Teddy'
 import Checkbox from './Checkbox'
 
 const checkboxes: CheckboxData[] = [
@@ -60,7 +61,7 @@ function CheckboxGroup() {
           />
         )
       })}
-      {selected.join(',')}
+      <Teddy hat={true} pullover={true} trousers={true} />
     </>
   )
 }

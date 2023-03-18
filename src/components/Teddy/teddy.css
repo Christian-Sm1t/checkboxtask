@@ -1,0 +1,23 @@
+#teddybox {
+  height: 150px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  background-image: url(./teddy.png);
+}
+
+#hat {
+  height: 50px;
+  background-image: url(./hat.png);
+}
+#pullover {
+  height: 50px;
+  background-image: url(./pullover.png);
+}
+#trousers {
+  height: 50px;
+  background-image: url(./trousers.png);
+}
+.isInvisible {
+  visibility: hidden;
+}
