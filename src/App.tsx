@@ -1,5 +1,7 @@
+import CheckboxGroup from './components/Checkbox/CheckboxGroup'
+
 function App() {
-  return <div className="App"></div>
+  return <CheckboxGroup />
 }
 
 export default App
