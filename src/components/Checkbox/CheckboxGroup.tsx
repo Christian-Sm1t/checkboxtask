@@ -51,6 +51,7 @@ function CheckboxGroup() {
           />
         )
       })}
+      {selected.join(',')}
     </>
   )
 }
