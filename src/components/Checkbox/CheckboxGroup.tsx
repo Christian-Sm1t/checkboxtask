@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { type CheckboxData } from '../../types/checkbox'
 
 const checkboxes: CheckboxData[] = [
@@ -10,6 +10,10 @@ const checkboxes: CheckboxData[] = [
 function CheckboxGroup() {
   const [selectAll, setSelectAll] = useState<boolean>(false)
   const [selected, setSelected] = useState<string[]>([])
+
+  useEffect(() => {
+    setSelectAll(checkboxes.length === selected.length)
+  }, [selected])
 
   function handleSelectAll(e: React.ChangeEvent<HTMLInputElement>): void {
     setSelectAll(e.target.checked)
@@ -35,6 +39,7 @@ function CheckboxGroup() {
     <>
       <input
         type="checkbox"
+        checked={selectAll}
         onChange={(e) => {
           handleSelectAll(e)
         }}
