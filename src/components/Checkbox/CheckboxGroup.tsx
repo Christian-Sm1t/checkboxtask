@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { type CheckboxData } from '../../types/checkbox'
+import Checkbox from './Checkbox'
 
 const checkboxes: CheckboxData[] = [
   { id: '1', name: 'hat' },
   { id: '2', name: 'pullover' },
-  { id: '3', name: 'trowsers' },
+  { id: '3', name: 'trousers' },
 ]
 
 function CheckboxGroup() {
@@ -37,19 +38,22 @@ function CheckboxGroup() {
 
   return (
     <>
-      <input
-        type="checkbox"
-        checked={selectAll}
+      <Checkbox
+        isChecked={selectAll}
+        name={`${selectAll ? 'uncheck ' : 'check '}all`}
+        id="checkAll"
         onChange={(e) => {
           handleSelectAll(e)
         }}
       />
+
       {checkboxes.map((checkbox) => {
         return (
-          <input
+          <Checkbox
             key={checkbox.id}
-            type="checkbox"
-            checked={selected.includes(checkbox.id)}
+            id={checkbox.id}
+            name={checkbox.name}
+            isChecked={selected.includes(checkbox.id)}
             onChange={(e) => {
               handleSelect(e, checkbox.id)
             }}
