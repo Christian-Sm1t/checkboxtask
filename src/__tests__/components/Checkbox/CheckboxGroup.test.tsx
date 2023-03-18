@@ -1,6 +1,5 @@
-import { describe, vi, it } from 'vitest'
+import { describe, it } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { type CheckboxProps } from '../../../types/checkbox'
 import CheckboxGroup from '../../../components/Checkbox/CheckboxGroup'
 
 describe('Multiple Checkboxes and a Teddy', () => {
