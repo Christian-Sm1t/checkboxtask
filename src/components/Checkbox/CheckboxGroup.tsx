@@ -61,7 +61,11 @@ function CheckboxGroup() {
           />
         )
       })}
-      <Teddy hat={true} pullover={true} trousers={true} />
+      <Teddy
+        hat={selected.includes('1')}
+        pullover={selected.includes('2')}
+        trousers={selected.includes('3')}
+      />
     </>
   )
 }
