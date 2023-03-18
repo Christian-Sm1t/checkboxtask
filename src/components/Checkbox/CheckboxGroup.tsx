@@ -18,6 +18,19 @@ function CheckboxGroup() {
     )
   }
 
+  function handleSelect(
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string
+  ): void {
+    setSelected((prevSelected) => {
+      if (e.target.checked) {
+        return [...prevSelected, id]
+      } else {
+        return prevSelected.filter((item) => item !== id)
+      }
+    })
+  }
+
   return (
     <>
       <input
@@ -32,6 +45,9 @@ function CheckboxGroup() {
             key={checkbox.id}
             type="checkbox"
             checked={selected.includes(checkbox.id)}
+            onChange={(e) => {
+              handleSelect(e, checkbox.id)
+            }}
           />
         )
       })}
