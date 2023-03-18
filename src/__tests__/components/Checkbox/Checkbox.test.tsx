@@ -21,7 +21,7 @@ describe('one Checkbox', () => {
     expect(checkbox.getAttribute('id')).toBe(checkBoxProps.id)
     expect(checkbox.getAttribute('type')).toBe('checkbox')
     expect(checkbox.checked).toBe(checkBoxProps.isChecked)
-    expect(onChange).toHaveBeenCalled(1)
+    expect(onChange).toHaveBeenCalledTimes(1)
 
     wrapper.unmount()
   })
