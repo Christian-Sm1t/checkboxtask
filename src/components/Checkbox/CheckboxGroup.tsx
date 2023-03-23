@@ -1,39 +1,51 @@
 import React, { useEffect, useState } from 'react'
-import { type CheckboxData } from '../../types/checkbox'
+import { type CheckboxState } from '../../types/checkbox'
 import Teddy from '../Teddy/Teddy'
 import Checkbox from './Checkbox'
 
-const checkboxes: CheckboxData[] = [
-  { id: '1', name: 'hat' },
-  { id: '2', name: 'pullover' },
-  { id: '3', name: 'trousers' },
-]
-
 function CheckboxGroup() {
   const [selectAll, setSelectAll] = useState<boolean>(false)
-  const [selected, setSelected] = useState<string[]>([])
+  const [checkboxList, setCheckboxList] = useState<CheckboxState[]>([
+    { id: '1', name: 'hat', selected: false },
+    { id: '2', name: 'pullover', selected: false },
+    { id: '3', name: 'trousers', selected: false },
+  ])
 
   useEffect(() => {
-    setSelectAll(checkboxes.length === selected.length)
-  }, [selected])
+    const countSelected = checkboxList.filter((checkbox) => {
+      return checkbox.selected
+    })
+    setSelectAll(countSelected.length === checkboxList.length)
+  }, [checkboxList])
 
-  function handleSelectAll(e: React.ChangeEvent<HTMLInputElement>): void {
-    setSelectAll(e.target.checked)
-    setSelected(
-      e.target.checked ? checkboxes.map((checkbox) => checkbox.id) : []
+  function handleChangeAllCheckboxes(
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void {
+    const checked = e.target.checked
+    setSelectAll(checked)
+    setCheckboxList((prevCheckboxStates) =>
+      prevCheckboxStates.map((checkbox) => ({
+        ...checkbox,
+        selected: checked,
+      }))
     )
   }
 
-  function handleSelect(
+  function handleChangeCheckbox(
     e: React.ChangeEvent<HTMLInputElement>,
     id: string
   ): void {
-    setSelected((prevSelected) => {
-      if (e.target.checked) {
-        return [...prevSelected, id]
-      } else {
-        return prevSelected.filter((item) => item !== id)
-      }
+    const checked = e.target.checked
+    setCheckboxList((prevCheckboxStates) => {
+      return prevCheckboxStates.map((checkbox) => {
+        if (checkbox.id === id) {
+          return {
+            ...checkbox,
+            selected: checked,
+          }
+        }
+        return checkbox
+      })
     })
   }
 
@@ -44,28 +56,24 @@ function CheckboxGroup() {
         name={`${selectAll ? 'uncheck ' : 'check '}all`}
         id="checkAll"
         onChange={(e) => {
-          handleSelectAll(e)
+          handleChangeAllCheckboxes(e)
         }}
       />
 
-      {checkboxes.map((checkbox) => {
+      {checkboxList.map((checkbox) => {
         return (
           <Checkbox
             key={checkbox.id}
             id={checkbox.id}
             name={checkbox.name}
-            isChecked={selected.includes(checkbox.id)}
+            isChecked={checkbox.selected}
             onChange={(e) => {
-              handleSelect(e, checkbox.id)
+              handleChangeCheckbox(e, checkbox.id)
             }}
           />
         )
       })}
-      <Teddy
-        hat={selected.includes('1')}
-        pullover={selected.includes('2')}
-        trousers={selected.includes('3')}
-      />
+      <Teddy checkboxes={checkboxList} />
     </>
   )
 }

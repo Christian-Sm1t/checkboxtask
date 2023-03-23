@@ -4,11 +4,13 @@ import Teddy from '../../../components/Teddy/Teddy'
 import { type TeddyProps } from '../../../types/teddy'
 
 describe('Teddy component renders div with 3 div children', () => {
-  it('the 3 children are not visible when all props are false', () => {
+  it('the 3 children are not visible when selected in all checkboxes is false', () => {
     const teddyProps: TeddyProps = {
-      hat: false,
-      pullover: false,
-      trousers: false,
+      checkboxes: [
+        { id: '1', name: 'hat', selected: false },
+        { id: '2', name: 'pullover', selected: false },
+        { id: '3', name: 'trousers', selected: false },
+      ],
     }
     const wrapper = render(<Teddy {...teddyProps} />)
     const childDivs: HTMLCollection = screen.getByTestId('teddybox').children
@@ -20,11 +22,13 @@ describe('Teddy component renders div with 3 div children', () => {
 
     wrapper.unmount()
   })
-  it('only the first child is visible if only hat prop is true', () => {
+  it('only the first child is visible if selected is only true for the checkbox with name "hat"', () => {
     const teddyProps: TeddyProps = {
-      hat: true,
-      pullover: false,
-      trousers: false,
+      checkboxes: [
+        { id: '1', name: 'hat', selected: true },
+        { id: '2', name: 'pullover', selected: false },
+        { id: '3', name: 'trousers', selected: false },
+      ],
     }
     const wrapper = render(<Teddy {...teddyProps} />)
     const childDivs: HTMLCollection = screen.getByTestId('teddybox').children

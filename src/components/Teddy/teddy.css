@@ -6,16 +6,16 @@
   background-image: url(./teddy.png);
 }
 
-#hat {
+.clothing {
   height: 50px;
+}
+.hat {
   background-image: url(./hat.png);
 }
-#pullover {
-  height: 50px;
+.pullover {
   background-image: url(./pullover.png);
 }
-#trousers {
-  height: 50px;
+.trousers {
   background-image: url(./trousers.png);
 }
 .isInvisible {

@@ -5,6 +5,10 @@ export interface CheckboxData {
   name: string
 }
 
+export interface CheckboxState extends CheckboxData {
+  selected: boolean
+}
+
 export interface CheckboxProps extends CheckboxData {
   isChecked: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>, id: string) => void

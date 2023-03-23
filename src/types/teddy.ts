@@ -1,5 +1,5 @@
+import { type CheckboxState } from './checkbox'
+
 export interface TeddyProps {
-  hat: boolean
-  pullover: boolean
-  trousers: boolean
+  checkboxes: CheckboxState[]
 }
